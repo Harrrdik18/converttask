@@ -61,12 +61,36 @@ The server will run on `http://localhost:3000` (or the port specified in `.env`)
 - `minPrice` (required): Minimum price of the dish.
 - `maxPrice` (required): Maximum price of the dish.
 
-**Example Request**:
+
+**Example 1: Standard Search**
 ```bash
 curl "http://localhost:3000/search/dishes?name=biryani&minPrice=150&maxPrice=300"
 ```
 
-**Example Response**:
+**Example 2: Low Price Range**
+Search for dishes between 100 and 200.
+```bash
+curl "http://localhost:3000/search/dishes?name=biryani&minPrice=100&maxPrice=200"
+```
+
+**Example 3: Case Insensitive Search**
+Search for 'paneer' matching 'Paneer Tikka'.
+```bash
+curl "http://localhost:3000/search/dishes?name=paneer&minPrice=100&maxPrice=500"
+```
+
+**Example 4: Error Case (Missing Parameters)**
+```bash
+curl "http://localhost:3000/search/dishes?name=biryani"
+```
+Response:
+```json
+{
+  "error": "Missing required query parameters: name, minPrice, maxPrice"
+}
+```
+
+**Successful Response Structure**:
 ```json
 {
   "restaurants": [
